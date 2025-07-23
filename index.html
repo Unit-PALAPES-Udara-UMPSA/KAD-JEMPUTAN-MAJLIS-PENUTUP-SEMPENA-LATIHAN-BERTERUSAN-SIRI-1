@@ -12,6 +12,7 @@
       background: #f3f3f3;
       color: #001f3f;
     }
+
     .countdown-section, .info-section, .rsvp-section, .gallery-section, .doa-section {
       background: #ddeaf4;
       padding: 20px;
@@ -20,14 +21,17 @@
       max-width: 700px;
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
+
     h2 {
       color: #002b5b;
       border-bottom: 2px dashed #004080;
       padding-bottom: 5px;
     }
+
     .info-list li {
       padding: 8px 0;
     }
+
     .rsvp-btn {
       display: inline-block;
       background: #003366;
@@ -37,6 +41,7 @@
       border-radius: 10px;
       font-weight: bold;
     }
+
     .gallery img {
       width: 100%;
       max-width: 200px;
@@ -44,6 +49,7 @@
       border-radius: 10px;
       border: 3px solid #004080;
     }
+
     .doa-section blockquote {
       font-style: italic;
       color: #002b5b;
@@ -52,22 +58,26 @@
       padding: 10px 15px;
       margin: 10px 0;
     }
+
     .footer-bar {
       display: flex;
       justify-content: space-around;
       background: #002244;
       padding: 10px 0;
     }
+
     .footer-bar a {
       text-align: center;
       color: white;
       text-decoration: none;
       font-size: 12px;
     }
+
     .footer-bar img {
       width: 24px;
       height: 24px;
     }
+
     footer {
       text-align: center;
       margin-top: 30px;
@@ -77,18 +87,89 @@
       font-size: 14px;
       font-weight: 500;
     }
+
+    /* Intro Modal Styling */
+    .intro-modal {
+  position: fixed;                     /* Fixed position relative to viewport */
+  top: 50%;                           /* Center vertically */
+  left: 50%;                          /* Center horizontally */
+  transform: translate(-50%, -50%);  /* Shift to perfectly center */
+
+  width: 320px;                       /* Card width */
+  padding: 20px 30px;                 /* Inner spacing */
+
+  background: linear-gradient(135deg, #001f3f, #004080);  /* Gradient background */
+  color: white;                      /* Text color */
+
+  border-radius: 12px;                /* Rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);  /* Subtle shadow for depth */
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;                     /* On top */
+}
+
+
+    .intro-modal h1 {
+      font-size: 2.5em;
+      color: #e0eaff;
+      text-shadow: 2px 2px #000;
+      margin-bottom: 0.3em;
+    }
+
+    .intro-modal h2 {
+      font-size: 1.5em;
+      font-weight: 300;
+      color: #cce0f5;
+      margin-bottom: 2em;
+      text-shadow: 1px 1px #000;
+    }
+
+    .intro-modal button {
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .intro-modal button:hover {
+      background-color: #0055aa;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
+
+  <!-- Modal Intro -->
+  <div class="intro-modal" id="introModal">
+    <h1>Kad Jemputan</h1>
+    <h2>Majlis Penutup Latihan Berterusan Siri I</h2>
+    <button onclick="startExperience()">BUKA</button>
+  </div>
+
+  <!-- Top Banner -->
   <div style="text-align: center;">
     <img src="assets/dinner1.png" style="max-width: 500px; width: 100%; height: auto;">
   </div>
 
+  <!-- Countdown -->
   <section class="countdown-section">
     <h2>Kiraan Detik ke Majlis</h2>
     <div id="countdown" class="countdown"></div>
   </section>
 
+  <!-- Info -->
   <section class="info-section">
     <h2>Maklumat Majlis</h2>
     <ul class="info-list">
@@ -96,11 +177,9 @@
       <li><b>Masa:</b> 2000H - 0030H</li>
       <li><b>Lokasi:</b> Laman Hasnah Basri, Kuantan</li>
     </ul>
-   
   </section>
 
-
-
+  <!-- Gallery -->
   <section class="gallery-section">
     <h2>Pemakaian Cadangan</h2>
     <div class="gallery">
@@ -110,25 +189,37 @@
     </div>
   </section>
 
-
-
+  <!-- Video Section -->
   <div class="video-section" style="text-align:center; margin-bottom: 20px;">
-    <iframe width="280" height="157"
-      src="https://www.youtube.com/embed/-cwtH-Gck_8?autoplay=1"
-      allow="autoplay; encrypted-media"
-      allowfullscreen>
-    </iframe>
+    <video id="eventVideo" width="280" height="157" autoplay muted playsinline loop>
+      <source src="assets/dinner-video.mp4" type="video/mp4">
+      Video tidak disokong oleh pelayar anda.
+    </video>
   </div>
 
+  <!-- Footer Navigation -->
   <nav class="footer-bar">
     <a href="aturcara.html"><img src="assets/aturcara.png"><span>ATURCARA</span></a>
     <a href="menu.html"><img src="assets/menu.png"><span>MENU</span></a>
     <a href="https://maps.app.goo.gl/2BhB859N6a6izKfj9"><img src="assets/maps.png"><span>LOKASI</span></a>
   </nav>
 
+  <!-- Footer -->
   <footer class="footer">
     <small>&copy; PalapesUDARA.pro</small>
   </footer>
+
+  <!-- Script to handle modal and unmuting video -->
+  <script>
+    function startExperience() {
+      document.getElementById('introModal').style.display = 'none';
+
+      const video = document.getElementById('eventVideo');
+      video.muted = false;
+      video.play();
+    }
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
